@@ -1,23 +1,18 @@
 import { useState } from "react"
 
-const Display = (props) => {
-  return (
-    <div>{props.counter}</div>
-  )
-}
+// Calling a function that changes the state causes the component to re-render
 
-const Button = (props) => {
-  return (
-    <button onClick={props.onClick}>
-      {props.text}
-    </button>
-  )
-}
+const Display = ({ counter }) => <div>{counter}</div>
+
+const Button = ({ onClick, text }) => <button onClick={onClick}>{text}</button>
 
 const App = () => {
   const [counter, setCounter] = useState(0)
 
-  const increaseByOne = () => setCounter(counter + 1)
+  const increaseByOne = () => {
+    console.log(counter)
+    setCounter(counter + 1)
+  }
   const decreaseByOne = () => setCounter(counter - 1)
   const setToZero = () => setCounter(0)
 
