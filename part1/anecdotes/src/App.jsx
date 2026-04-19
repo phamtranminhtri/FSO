@@ -2,6 +2,16 @@ import { useState } from 'react'
 
 const getRandomInt = (max) => Math.floor(Math.random() * max)
 
+const getIndexOfMax = (array) => {
+  let maxIndex = 0
+  for (const index in array) {
+    if (array[index] > array[maxIndex]) {
+      maxIndex = index
+    }
+  }
+  return maxIndex
+} 
+
 const App = () => {
   const anecdotes = [
     'If it hurts, do it more often.',
@@ -27,8 +37,11 @@ const App = () => {
     setVotes(newVotes)
   }
 
+  const maxIndex = getIndexOfMax(votes)
+
   return (
     <div>
+      <h2>Anecdote of the day</h2>
       <p>
         {anecdotes[selected]}
       </p>
@@ -37,6 +50,14 @@ const App = () => {
       </p>
       <button onClick={increaseVote}>vote</button>
       <button onClick={nextIndex}>next anecdote</button>
+
+      <h2>Anecdote with most votes</h2>
+      <p>
+        {anecdotes[maxIndex]}
+      </p>
+      <p>
+        has {votes[maxIndex]} votes
+      </p>
     </div>
   )
 }
