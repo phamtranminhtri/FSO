@@ -81,3 +81,4 @@ const average = function (a, b) {
 }
 
 console.log(average(100, 200))
+
