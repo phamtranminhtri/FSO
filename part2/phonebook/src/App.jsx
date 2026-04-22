@@ -53,6 +53,16 @@ const App = () => {
     setNewNumber("")
   }
 
+  const deletePerson = (id) => {
+    axios
+      .delete(`http://localhost:3001/persons/${id}`)
+      .then(response => {
+        console.log("Deleted", response)
+        const newPersons = persons.filter(person => person.id !== id)
+        setPersons(newPersons)
+      })
+  }
+
   const filteredPersons = filter === "" ? persons : persons.filter(
     person => person.name.toLowerCase().includes(filter.toLowerCase())
   )
@@ -72,7 +82,7 @@ const App = () => {
       />
 
       <h2>Numbers</h2>
-      <Persons persons={filteredPersons} />
+      <Persons persons={filteredPersons} handleDelete={deletePerson} />
     </div>
   )
 }
