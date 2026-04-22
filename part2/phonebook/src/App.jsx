@@ -54,6 +54,11 @@ const App = () => {
   }
 
   const deletePerson = (id) => {
+    const person = persons.find(p => p.id === id)
+    if (!confirm(`Wanna delete ${person.name}?`)) {
+      return
+    }
+
     axios
       .delete(`http://localhost:3001/persons/${id}`)
       .then(response => {
