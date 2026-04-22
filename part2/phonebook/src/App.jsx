@@ -30,7 +30,7 @@ const App = () => {
   }
 
   const handleFilterChange = (event) => {
-    setFilter(event.target.value.toLowerCase())
+    setFilter(event.target.value)
   }
 
   const addPerson = (event) => {
@@ -48,7 +48,7 @@ const App = () => {
   }
 
   const filteredPersons = filter === "" ? persons : persons.filter(
-    person => person.name.toLowerCase().includes(filter)
+    person => person.name.toLowerCase().includes(filter.toLowerCase())
   )
 
   return (
