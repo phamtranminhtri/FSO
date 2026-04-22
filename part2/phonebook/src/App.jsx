@@ -41,8 +41,14 @@ const App = () => {
       return
     }
 
-    const newPerson = { name: newName, number: newNumber, id: persons.length + 1 }
-    setPersons(persons.concat(newPerson))
+    const newPerson = { name: newName, number: newNumber }
+
+    axios
+      .post("http://localhost:3001/persons", newPerson)
+      .then(response => {
+        setPersons(persons.concat(response.data))
+      })
+
     setNewName("")
     setNewNumber("")
   }
@@ -57,14 +63,16 @@ const App = () => {
       <Filter filter={filter} handleChange={handleFilterChange} />
 
       <h2>Add a new</h2>
-      <PersonForm newName={newName} newNumber={newNumber} handleNameChange={handleNameChange} handleNumberChange={handleNumberChange} handleSubmit={addPerson} />
+      <PersonForm 
+        newName={newName} 
+        newNumber={newNumber} 
+        handleNameChange={handleNameChange} 
+        handleNumberChange={handleNumberChange} 
+        handleSubmit={addPerson} 
+      />
 
       <h2>Numbers</h2>
       <Persons persons={filteredPersons} />
-
-      <div>
-        Debug: {newName}
-      </div>
     </div>
   )
 }
